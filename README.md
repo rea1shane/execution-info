@@ -1,6 +1,21 @@
 duration-info
 =============
 
+> [!IMPORTANT]
+>
+> The following changes have been made based on the original version:
+>
+> 1. Disabled features:
+>    1. Flag `':zim:duration-info' show-milliseconds`.
+>    1. If the threshold value is less than 1, then milliseconds are automatically shown.
+> 1. Redesign the content of `%d`:
+>    | When               | Format          | Example  |
+>    | ------------------ | --------------- | -------- |
+>    | 1h =< duration     | `${h}h ${m}m`   | `1h 2m`  |
+>    | 1m =< duration <1h | `${m}m ${s}s`   | `1m 2s`  |
+>    | 1s =< duration <1m | `${s}s ${ms}ms` | `1s 2ms` |
+>    | duration <1s       | `${ms}ms`       | `2ms`    |
+
 Exposes to prompts how long the last command took to execute.
 
 Settings
@@ -12,12 +27,12 @@ with:
 
     zstyle ':zim:duration-info' threshold <threshold value>
 
-The threshold value can be a decimal number. If the threshold value is less than
-1, then milliseconds are automatically shown.
+The threshold value can be a decimal number. ~~If the threshold value is less than
+1, then milliseconds are automatically shown.~~
 
-Milliseconds can also be directly enabled with the following zstyle:
+~~Milliseconds can also be directly enabled with the following zstyle:~~
 
-    zstyle ':zim:duration-info' show-milliseconds yes
+    # [DEPRECATED] zstyle ':zim:duration-info' show-milliseconds yes
 
 Theming
 -------

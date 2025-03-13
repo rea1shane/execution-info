@@ -9,23 +9,19 @@ if (( __DURATION_INFO_PREEXEC_REALTIME )); then
   local -rF duration_realtime=$(( EPOCHREALTIME - __DURATION_INFO_PREEXEC_REALTIME ))
   unset __DURATION_INFO_PREEXEC_REALTIME
   if (( duration_realtime >= threshold_realtime )); then
-    local -ri duration_seconds=${duration_realtime}
-    local -ri s=$(( duration_seconds%60 ))
-    local -ri m=$(( (duration_seconds/60)%60 ))
-    local -ri h=$(( duration_seconds/3600 ))
+    local -ri ms=$(( duration_realtime%1*1000 ))
+    local -ri s=$(( duration_realtime%60 ))
+    local -ri m=$(( (duration_realtime/60)%60 ))
+    local -ri h=$(( duration_realtime/3600 ))
     local duration
     if (( h > 0 )); then
-      duration=${h}h${m}m
+      duration="${h}h ${m}m"
     elif (( m > 0 )); then
-      duration=${m}m${s}s
-    elif (( threshold_realtime < 1 )) || zstyle -t ':zim:duration-info' show-milliseconds; then
-      if (( duration_realtime >= 1 )); then
-        printf -v duration %.3fs ${duration_realtime}
-      else
-        printf -v duration %.0fms $(( duration_realtime*1000 ))
-      fi
+      duration="${m}m ${s}s"
+    elif (( s > 0 )); then
+      duration="${s}s ${ms}ms"
     else
-      duration=${duration_seconds}s
+      duration="${ms}ms"
     fi
     zformat -f duration_info ${duration_format} d:${duration}
   else
