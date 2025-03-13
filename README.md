@@ -74,13 +74,13 @@ Here's an example:
 setopt nopromptbang prompt{cr,percent,sp,subst}
 
 zstyle ':zim:execution-info' duration-threshold 0.5
-zstyle ':zim:execution-info' start-format       'executed at %Y-%m-%d %H:%M:%S, '
-zstyle ':zim:execution-info' duration-format    'took %d, '
-zstyle ':zim:execution-info' end-format         'finished at %Y-%m-%d %H:%M:%S'
+zstyle ':zim:execution-info' start-format       'executed at %Y-%m-%d %H:%M:%S'
+zstyle ':zim:execution-info' end-format         ', finished at %Y-%m-%d %H:%M:%S'
+zstyle ':zim:execution-info' duration-format    ', took %d'
 
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec execution-info-preexec
 add-zsh-hook precmd  execution-info-precmd
 
-RPS1='${execution_start_info}${execution_duration_info}${execution_end_info}'
+RPS1='${execution_start_info}${execution_end_info}${execution_duration_info}'
 ```
