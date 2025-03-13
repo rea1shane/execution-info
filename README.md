@@ -61,8 +61,8 @@ If the duration is less than the threshold, the variable is unset instead.
 
 Add following contents in your prompt code. Usually, you'll add it to the value of either `PS1` or `RPS1`.
 
-- Add `${execution_start_info}` to where you want the start information to be displayed.
-- Add `${execution_end_info}` to where you want the endinformation to be displayed.
+- Add `${execution_start_info}` to where you want the start time information to be displayed.
+- Add `${execution_end_info}` to where you want the end time information to be displayed.
 - Add `${execution_duration_info}` to where you want the duration information to be displayed.
 
 Also, add the `execution-info-preexec` and `execution-info-precmd`
