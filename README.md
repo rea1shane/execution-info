@@ -31,8 +31,7 @@ zstyle ':zim:execution-info' start-format '<date format string>' # default: '%Y-
 zstyle ':zim:execution-info' end-format '<date format string>' # default: '%Y-%m-%d %H:%M:%S'
 ```
 
-The module will use GNU date or BSD date (depending on the version of date in the environment) to format the time according to the format string.
-and the `execution_start_info` and `ecction_end_info` variables are set to formatted strings respectively.
+The module will use Zsh's `strftime` to format the time according to the format string, and the `execution_start_info` and `execution_end_info` variables are set to formatted strings respectively.
 
 ### Duration
 

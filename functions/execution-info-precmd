@@ -11,24 +11,12 @@ if (( __EXECUTION_INFO_PREEXEC_REALTIME )); then
   # Start
   local start_format
   zstyle -s ':zim:execution-info' start-format 'start_format' || start_format="%Y-%m-%d %H:%M:%S"
-  if date --version >/dev/null 2>&1; then
-    # GNU date
-    execution_start_info=$(date -d "@${preexec_timestamp}" +"${start_format}")
-  else
-    # BSD date
-    execution_start_info=$(date -r "${preexec_timestamp}" +"${start_format}")
-  fi
+  strftime -s execution_start_info "${start_format}" "${preexec_timestamp}"
 
   # End
   local end_format
   zstyle -s ':zim:execution-info' end-format 'end_format' || end_format="%Y-%m-%d %H:%M:%S"
-  if date --version >/dev/null 2>&1; then
-    # GNU date
-    execution_end_info=$(date -d "@${precmd_timestamp}" +"${end_format}")
-  else
-    # BSD date
-    execution_end_info=$(date -r "${precmd_timestamp}" +"${end_format}")
-  fi
+  strftime -s execution_end_info "${end_format}" "${precmd_timestamp}"
 
   # Duration
   local -F threshold_realtime
